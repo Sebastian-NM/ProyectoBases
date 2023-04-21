@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package org.example.ui;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import org.example.ui.LobbyPacienteUI;
+import org.example.ui.LoginFuncionario;
 
 /**
  *
@@ -17,8 +18,9 @@ public class HomeUI extends javax.swing.JFrame {
      * Creates new form HomeUI
      */
     public HomeUI() {
-    setLocationRelativeTo(null);
-    initComponents(); 
+        // Calcula la mitad de la pantalla
+        setLocation(520,200);
+        initComponents();
     }
 
     /**
@@ -47,6 +49,11 @@ public class HomeUI extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Paciente");
         jButton1.setToolTipText("Accede a todas las funcionalidades disponibles para pacientes");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 0, 51));
@@ -105,13 +112,21 @@ public class HomeUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            // Crear una instancia del nuevo frame
-            LobbyPacienteUI frameTipoUsuarioMetodo = new LobbyPacienteUI();
-            // Hacer visible el nuevo frame
-            frameTipoUsuarioMetodo.setVisible(true);
-            // Cerrar el frame actual
-            dispose();
+        // Crear una instancia del nuevo frame
+        LoginFuncionario frameTipoUsuarioMetodo = new LoginFuncionario();
+        // Hacer visible el nuevo frame
+        frameTipoUsuarioMetodo.setVisible(true);
+        // Cerrar el frame actual
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        LoginPaciente frameTipoUsuarioMetodo = new LoginPaciente();
+        // Hacer visible el nuevo frame
+        frameTipoUsuarioMetodo.setVisible(true);
+        // Cerrar el frame actual
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

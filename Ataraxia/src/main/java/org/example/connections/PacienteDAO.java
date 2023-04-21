@@ -70,4 +70,22 @@ public class PacienteDAO {
             daoT.agregarTelefono(paciente.getPatientID(), listaNumeros.get(i));
         }
     }
+    
+    public static boolean existePaciente(int id) {
+        boolean existe = false;
+        try {
+            Connection conn = ConexionBD.getConnection();
+            String sql = "SELECT * FROM paciente WHERE patientID = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                existe = true;
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return existe;
+    }
 }

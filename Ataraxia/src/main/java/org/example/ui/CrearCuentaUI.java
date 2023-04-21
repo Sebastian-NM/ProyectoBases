@@ -32,6 +32,7 @@ public class CrearCuentaUI extends javax.swing.JFrame {
      */
     public CrearCuentaUI() throws ParseException {
         initComponents();
+        setLocation(520,200);
         CentroAtencionDAO cent = new CentroAtencionDAO();
         List<CentroAtencion> centros = cent.getAll();
         for (CentroAtencion centro : centros) {

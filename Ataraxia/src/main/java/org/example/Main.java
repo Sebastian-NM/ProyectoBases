@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.Connection;
 import org.example.classes.CentroAtencion;
 import org.example.classes.Funcionario;
 import org.example.classes.Paciente;
@@ -13,13 +14,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import org.example.connections.ConexionBD;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        System.out.println("Hello Nosus");
-        System.out.println("Hello Nosus");
-        System.out.println("Hello Nosus");
-        System.out.println("Hello Nosus");
+        CentroAtencionDAO dao = new CentroAtencionDAO();
+        List<CentroAtencion> centros = dao.getAll();
+        // Imprimir los centros de atención recuperados
+        for (CentroAtencion centro : centros) {
+            System.out.println(centro);
+        }
     }
 }
