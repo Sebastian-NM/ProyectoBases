@@ -160,30 +160,24 @@ public class LoginPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static boolean contieneLetras(String cadena) {
-        System.out.println("Entra");
-        for (int i = 0; i < cadena.length(); i++) {
-            if (Character.isLetter(cadena.charAt(i))) {
-                System.out.println("Letra!");
-                return true;
-            }
-        }
-        return false;
-    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String texto = inputID.getText();
-        if (!(texto.isBlank())) {
-            if (PacienteDAO.existePaciente(Integer.parseInt(inputID.getText()))) {
+        if (texto.matches("\\d+")) { // Verificar si el texto ingresado es numérico
+            if (PacienteDAO.existePaciente(Integer.parseInt(texto))) {
                 System.out.println("Existe el paciente!");
-    }//GEN-LAST:event_jButton1ActionPerformed
-            else {
+            } else {
                 ErrorCredencialesUI frameTipoUsuarioMetodo = new ErrorCredencialesUI();
                 // Hacer visible el nuevo frame
                 frameTipoUsuarioMetodo.setVisible(true);
-                }
+            }
+        } else {
+            ErrorCredencialesUI frameTipoUsuarioMetodo = new ErrorCredencialesUI();
+            // Hacer visible el nuevo frame
+            frameTipoUsuarioMetodo.setVisible(true);
         }
-    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             // Crear una instancia del nuevo frame

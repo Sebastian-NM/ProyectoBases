@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import org.example.classes.CentroAtencion;
 import org.example.classes.Paciente;
 import org.example.connections.CentroAtencionDAO;
@@ -32,12 +33,13 @@ public class CrearCuentaUI extends javax.swing.JFrame {
      */
     public CrearCuentaUI() throws ParseException {
         initComponents();
-        setLocation(520,200);
+        setLocation(520, 200);
         CentroAtencionDAO cent = new CentroAtencionDAO();
         List<CentroAtencion> centros = cent.getAll();
         for (CentroAtencion centro : centros) {
             inputCentroAtencion.addItem(Integer.toString(centro.getCenterID()));
         }
+        inputTelefono.setEditable(true);
     }
 
     /**
@@ -63,11 +65,13 @@ public class CrearCuentaUI extends javax.swing.JFrame {
         inputCedula = new javax.swing.JTextField();
         inputFechaNacimiento = new javax.swing.JTextField();
         inputBloodType = new javax.swing.JComboBox<>();
-        inputTelefono = new javax.swing.JTextField();
         inputCentroAtencion = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         inputNacionalidad = new javax.swing.JComboBox<>();
         inputResidencia = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        inputTelefono = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Powered by TuSalud®");
@@ -96,6 +100,12 @@ public class CrearCuentaUI extends javax.swing.JFrame {
         jLabel9.setText("ID de Centro de Atención:");
         jLabel9.setFocusable(false);
 
+        inputNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputNombreActionPerformed(evt);
+            }
+        });
+
         inputBloodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-" }));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -107,7 +117,21 @@ public class CrearCuentaUI extends javax.swing.JFrame {
         });
 
         inputNacionalidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afganistán", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bangladés", "Barbados", "Baréin", "Bélgica", "Belice", "Benín", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", "Botsuana", "Brasil", "Brunéi", "Bulgaria", "Burkina Faso", "Burundi", "Bután", "Cabo Verde", "Camboya", "Camerún", "Canadá", "Catar", "Chad", "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", "Emiratos Árabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "España", "Estados Unidos", "Estonia", "Etiopía", "Filipinas", "Finlandia", "Fiyi", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Granada", "Grecia", "Guatemala", "Guyana", "Guinea", "Guinea ecuatorial", "Guinea-Bisáu", "Haití", "Honduras", "Hungría", "India", "Indonesia", "Irak", "Irán", "Irlanda", "Islandia", "Islas Marshall", "Islas Salomón", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajistán", "Kenia", "Kirguistán", "Kiribati", "Kuwait", "Laos", "Lesoto", "Letonia", "Líbano", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", "Malasia", "Malaui", "Maldivas", "Malí", "Malta", "Marruecos", "Mauricio", "Mauritania", "México", "Micronesia", "Moldavia", "Mónaco", "Mongolia", "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", "Níger", "Nigeria", "Noruega", "Nueva Zelanda", "Omán", "Países Bajos", "Pakistán", "Palaos", "Panamá", "Papúa Nueva Guinea", "Paraguay", "Perú", "Polonia", "Portugal", "Reino Unido", "República Centroafricana", "República Checa", "República de Macedonia", "República del Congo", "República Democrática del Congo", "República Dominicana", "República Sudafricana", "Ruanda", "Rumanía", "Rusia", "Samoa", "San Cristóbal y Nieves", "San Marino", "San Vicente y las Granadinas", "Santa Lucía", "Santo Tomé y Príncipe", "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", "Somalia", "Sri Lanka", "Suazilandia", "Sudán", "Sudán del Sur", "Suecia", "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistán", "Timor Oriental", "Togo", "Tonga", "Trinidad y Tobago", "Túnez", "Turkmenistán", "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistán", "Vanuatu", "Vaticano", "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue" }));
-        inputNacionalidad.setSelectedIndex(-1);
+
+        jButton2.setText("+");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton4.setText("Volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,21 +159,29 @@ public class CrearCuentaUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(inputBloodType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(inputTelefono)
                                     .addComponent(inputCentroAtencion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(inputNacionalidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(inputCedula)
                                     .addComponent(inputFechaNacimiento)
+                                    .addComponent(inputResidencia)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(inputResidencia))))))
-                .addGap(139, 139, 139))
+                                    .addComponent(inputTelefono, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(58, 58, 58))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(28, 28, 28)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -178,8 +210,9 @@ public class CrearCuentaUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(inputCentroAtencion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,29 +237,70 @@ public class CrearCuentaUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Paciente stickman = new Paciente();
-        stickman.setPatientID(inputCedula.getText());
-        stickman.setPatientName(inputNombre.getText());
-        String fechaSeleccionada;
-        fechaSeleccionada = inputFechaNacimiento.getText();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaDate = null;
-        try {
-            fechaDate = sdf.parse(fechaSeleccionada);
-        } catch (ParseException ex) {
-            Logger.getLogger(CrearCuentaUI.class.getName()).log(Level.SEVERE, null, ex);
+    public boolean revisarContenido() {
+        if (inputNombre.getText().isBlank() || !inputNombre.getText().matches("^[a-zA-Z]+$") || inputCedula.getText().isBlank()
+                || inputFechaNacimiento.getText().isBlank() || inputResidencia.getText().isBlank() || inputTelefono.getSelectedItem().toString().isBlank()
+                || inputTelefono.getSelectedItem().toString().matches("\\d+")) {
+            return false;
         }
-        stickman.setPatientBirthdayDate(fechaDate);
-        stickman.setPatientBloodType(inputBloodType.getSelectedItem().toString());
-        stickman.setPatientNacionality(inputNacionalidad.getSelectedItem().toString());
-        stickman.setPatientAdress(inputResidencia.getText());
-        List<String> telefonos = new ArrayList<String>();
-        telefonos.add(inputTelefono.getText());
-        stickman.setPatientPhoneNumbers(telefonos);
-        stickman.setPatientCenter(Integer.parseInt(inputCentroAtencion.getSelectedItem().toString()));
-        System.out.println(stickman.toString());
+        return true;
+    }
+
+    List<String> telefonos = new ArrayList<String>();
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (revisarContenido()) {
+            Paciente stickman = new Paciente();
+            stickman.setPatientID(inputCedula.getText());
+            stickman.setPatientName(inputNombre.getText());
+            String fechaSeleccionada;
+            fechaSeleccionada = inputFechaNacimiento.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaDate = null;
+            try {
+                fechaDate = sdf.parse(fechaSeleccionada);
+            } catch (ParseException ex) {
+                Logger.getLogger(CrearCuentaUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            stickman.setPatientBirthdayDate(fechaDate);
+            stickman.setPatientBloodType(inputBloodType.getSelectedItem().toString());
+            stickman.setPatientNacionality(inputNacionalidad.getSelectedItem().toString());
+            stickman.setPatientAdress(inputResidencia.getText());
+
+            stickman.setPatientPhoneNumbers(telefonos);
+            stickman.setPatientCenter(Integer.parseInt(inputCentroAtencion.getSelectedItem().toString()));
+            System.out.println(stickman.toString());
+        } else {
+            ErrorDatosIngresadosUI frameTipoUsuarioMetodo = new ErrorDatosIngresadosUI();
+            // Hacer visible el nuevo frame
+            frameTipoUsuarioMetodo.setVisible(true);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void inputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputNombreActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JTextField editor = (JTextField) inputTelefono.getEditor().getEditorComponent();
+        String valorIngresado = editor.getText();
+        if (valorIngresado.matches("^\\d{8}$")) {
+            inputTelefono.addItem(valorIngresado);
+            telefonos.add(valorIngresado);
+        } else {
+            ErrorTelefonoUI frameTipoUsuarioMetodo = new ErrorTelefonoUI();
+            frameTipoUsuarioMetodo.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        LoginPaciente frameTipoUsuarioMetodo = new LoginPaciente();
+        // Hacer visible el nuevo frame
+        frameTipoUsuarioMetodo.setVisible(true);
+        // Cerrar el frame actual
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,8 +349,10 @@ public class CrearCuentaUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> inputNacionalidad;
     private javax.swing.JTextField inputNombre;
     private javax.swing.JTextField inputResidencia;
-    private javax.swing.JTextField inputTelefono;
+    private javax.swing.JComboBox<String> inputTelefono;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
