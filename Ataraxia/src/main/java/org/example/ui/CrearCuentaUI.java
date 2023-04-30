@@ -4,29 +4,27 @@
  */
 package org.example.ui;
 
-import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import org.example.classes.CentroAtencion;
 import org.example.classes.Paciente;
 import org.example.connections.CentroAtencionDAO;
-import org.example.connections.ConexionBD;
-import org.example.connections.CitaDAO;
 import org.example.connections.PacienteDAO;
 
-/**
+/*
  *
  * @author Sebastián Navarro
  */
 public class CrearCuentaUI extends javax.swing.JFrame {
+    
+    PacienteDAO pDAO = new PacienteDAO();
 
     /**
      * Creates new form CrearCuentaUI
@@ -63,7 +61,6 @@ public class CrearCuentaUI extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         inputNombre = new javax.swing.JTextField();
         inputCedula = new javax.swing.JTextField();
-        inputFechaNacimiento = new javax.swing.JTextField();
         inputBloodType = new javax.swing.JComboBox<>();
         inputCentroAtencion = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -72,6 +69,9 @@ public class CrearCuentaUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         inputTelefono = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
+        inputDia = new javax.swing.JComboBox<>();
+        inputMes = new javax.swing.JComboBox<>();
+        inputAnnio = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Powered by TuSalud®");
@@ -133,19 +133,33 @@ public class CrearCuentaUI extends javax.swing.JFrame {
             }
         });
 
+        inputDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        inputMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre" }));
+
+        inputAnnio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
+        inputAnnio.setSelectedIndex(93);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
@@ -158,23 +172,22 @@ public class CrearCuentaUI extends javax.swing.JFrame {
                                     .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inputMes, 0, 164, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inputAnnio, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(inputBloodType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(inputCentroAtencion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(inputNacionalidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(inputCedula)
-                                    .addComponent(inputFechaNacimiento)
                                     .addComponent(inputResidencia)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(inputNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(inputTelefono, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(inputTelefono, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(inputNombre)
+                                    .addComponent(inputCentroAtencion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addGap(58, 58, 58))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(96, 96, 96))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +207,9 @@ public class CrearCuentaUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(inputFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputAnnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -216,9 +231,9 @@ public class CrearCuentaUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(inputCentroAtencion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,10 +252,16 @@ public class CrearCuentaUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        private boolean revisarID(int ID){
+        if (PacienteDAO.existePaciente(ID)) {
+            return true;
+        }
+        return false;
+    }
     public boolean revisarContenido() {
-        if (inputNombre.getText().isBlank() || !inputNombre.getText().matches("^[a-zA-Z]+$") || inputCedula.getText().isBlank()
-                || inputFechaNacimiento.getText().isBlank() || inputResidencia.getText().isBlank() || inputTelefono.getSelectedItem().toString().isBlank()
-                || inputTelefono.getSelectedItem().toString().matches("\\d+")) {
+        if (inputNombre.getText().isBlank() || inputNombre.getText().isBlank() || inputCedula.getText().isBlank()
+                 || inputResidencia.getText().isBlank() || inputTelefono.getSelectedItem().toString().isBlank()
+                || !inputTelefono.getSelectedItem().toString().matches("\\d+") || revisarID(Integer.parseInt(inputCedula.getText()))) {
             return false;
         }
         return true;
@@ -248,28 +269,46 @@ public class CrearCuentaUI extends javax.swing.JFrame {
 
     List<String> telefonos = new ArrayList<String>();
 
+    private int obtenerIndiceMes(String mes) {
+        String[] nombresMeses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        for (int i = 0; i < nombresMeses.length; i++) {
+            if (nombresMeses[i].equalsIgnoreCase(mes)) {
+                return i;
+            }
+        }
+        return -1; // Si no se encuentra el mes, devuelve -1
+    }
+     
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (revisarContenido()) {
             Paciente stickman = new Paciente();
             stickman.setPatientID(inputCedula.getText());
             stickman.setPatientName(inputNombre.getText());
-            String fechaSeleccionada;
-            fechaSeleccionada = inputFechaNacimiento.getText();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaDate = null;
-            try {
-                fechaDate = sdf.parse(fechaSeleccionada);
-            } catch (ParseException ex) {
-                Logger.getLogger(CrearCuentaUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            int dia = Integer.parseInt(inputDia.getSelectedItem().toString());
+            String mesString = (String) inputMes.getSelectedItem();
+            int anio = Integer.parseInt(inputAnnio.getSelectedItem().toString());
+            // Crear un objeto Calendar con la fecha seleccionada
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(anio, obtenerIndiceMes(mesString), dia);
+            // Crear un objeto Date a partir del objeto Calendar
+            Date fechaDate = calendar.getTime();
+            stickman.setPatientBirthdayDate(fechaDate);
             stickman.setPatientBirthdayDate(fechaDate);
             stickman.setPatientBloodType(inputBloodType.getSelectedItem().toString());
             stickman.setPatientNacionality(inputNacionalidad.getSelectedItem().toString());
             stickman.setPatientAdress(inputResidencia.getText());
-
             stickman.setPatientPhoneNumbers(telefonos);
             stickman.setPatientCenter(Integer.parseInt(inputCentroAtencion.getSelectedItem().toString()));
             System.out.println(stickman.toString());
+            UsuarioCreado winUsuarioCreado = new UsuarioCreado();
+            winUsuarioCreado.setVisible(true);
+            dispose();            
+            try {
+                pDAO.agregarPaciente(stickman);
+            } catch (SQLException ex) {
+                Logger.getLogger(CrearCuentaUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             ErrorDatosIngresadosUI frameTipoUsuarioMetodo = new ErrorDatosIngresadosUI();
             // Hacer visible el nuevo frame
@@ -342,10 +381,12 @@ public class CrearCuentaUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> inputAnnio;
     private javax.swing.JComboBox<String> inputBloodType;
     private javax.swing.JTextField inputCedula;
     private javax.swing.JComboBox<String> inputCentroAtencion;
-    private javax.swing.JTextField inputFechaNacimiento;
+    private javax.swing.JComboBox<String> inputDia;
+    private javax.swing.JComboBox<String> inputMes;
     private javax.swing.JComboBox<String> inputNacionalidad;
     private javax.swing.JTextField inputNombre;
     private javax.swing.JTextField inputResidencia;

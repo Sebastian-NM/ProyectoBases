@@ -90,14 +90,6 @@ public class Cita {
 
     @Override
     public String toString() {
-        return "{" +
-                " appointmentId='" + getAppointmentId() + "'" +
-                ", appointmentStatus='" + getAppointmentStatus() + "'" +
-                ", appointmentSpecialty='" + getAppointmentSpecialty() + "'" +
-                ", appointmentDate='" + getAppointmentDate() + "'" +
-                ", appointmentTime='" + getAppointmentTime() + "'" +
-                ", appointmentNotes='" + getAppointmentNotes() + "'" +
-                ", appointmentAttendant='" + getAppointmentAttendant() + "'" +
-                "}";
+        return "ID: " + getAppointmentId() + " Estado: " + getAppointmentStatus() + " Especialidad: " + getAppointmentSpecialty() + " Fecha: " + getAppointmentDate() + " Hora: " + getAppointmentTime();
     }
 }

@@ -165,7 +165,12 @@ public class LoginPaciente extends javax.swing.JFrame {
         String texto = inputID.getText();
         if (texto.matches("\\d+")) { // Verificar si el texto ingresado es numérico
             if (PacienteDAO.existePaciente(Integer.parseInt(texto))) {
-                System.out.println("Existe el paciente!");
+                TramitesUI frameTipoUsuarioMetodo = new TramitesUI();
+                // Hacer visible el nuevo frame
+                System.out.println("Se manda en el login: " + texto);
+                frameTipoUsuarioMetodo.setPatientID(texto);
+                frameTipoUsuarioMetodo.setVisible(true);
+                dispose();
             } else {
                 ErrorCredencialesUI frameTipoUsuarioMetodo = new ErrorCredencialesUI();
                 // Hacer visible el nuevo frame

@@ -4,17 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import org.example.classes.Paciente;
 import java.sql.*;
 
 public class PacienteDAO {
-    private Connection connection;
+    public Connection connection;
 
     public PacienteDAO() {
         connection = ConexionBD.getConnection();
     }
+    
 
     public void agregarPaciente(Paciente paciente) throws SQLException {
         // Insertar el nuevo paciente en la tabla "paciente"
