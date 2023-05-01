@@ -300,7 +300,6 @@ public class CrearCuentaUI extends javax.swing.JFrame {
             stickman.setPatientAdress(inputResidencia.getText());
             stickman.setPatientPhoneNumbers(telefonos);
             stickman.setPatientCenter(Integer.parseInt(inputCentroAtencion.getSelectedItem().toString()));
-            System.out.println(stickman.toString());
             UsuarioCreado winUsuarioCreado = new UsuarioCreado();
             winUsuarioCreado.setVisible(true);
             dispose();            

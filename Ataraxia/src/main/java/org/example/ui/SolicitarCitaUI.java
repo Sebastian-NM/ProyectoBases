@@ -4,6 +4,15 @@
  */
 package org.example.ui;
 
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import org.example.classes.Cita;
+import org.example.connections.CitaDAO;
+
 /**
  *
  * @author Sebastián
@@ -15,6 +24,24 @@ public class SolicitarCitaUI extends javax.swing.JFrame {
      */
     public SolicitarCitaUI() {
         initComponents();
+        setLocation(520, 200);
+        SpinnerModel spinnerModel = new SpinnerNumberModel(1, 1, 20, 1); // Ejemplo con SpinnerNumberModel
+
+        SpinnerModel spinnerModelb = new SpinnerNumberModel(0, 0, 59, 15); // Ejemplo con SpinnerNumberModel
+        inputHora.setModel(spinnerModel);
+        inputMinuto.setModel(spinnerModelb);
+
+        JFormattedTextField textField = ((JSpinner.DefaultEditor) inputHora.getEditor()).getTextField();
+        textField.setEditable(false); // Deshabilitar la edición del campo de texto del spinner
+        JFormattedTextField textFieldb = ((JSpinner.DefaultEditor) inputMinuto.getEditor()).getTextField();
+        textFieldb.setEditable(false); // Deshabilitar la edición del campo de texto del spinner
+    }
+
+    private String patientID;
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+        // Puedes hacer cualquier otra operación necesaria con el ID del paciente aquí
     }
 
     /**
@@ -26,21 +53,245 @@ public class SolicitarCitaUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        inputDia = new javax.swing.JComboBox<>();
+        inputMes = new javax.swing.JComboBox<>();
+        inputAnnio = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        inputEspecialidad = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        inputHora = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
+        btnCita = new javax.swing.JButton();
+        btnAsistente = new javax.swing.JButton();
+        inputMinuto = new javax.swing.JSpinner();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inputNotas = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Fecha:");
+
+        inputDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        inputMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre" }));
+
+        inputAnnio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2023", "2024" }));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Especialidad:");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Hora:");
+
+        inputHora.setModel(new javax.swing.SpinnerNumberModel(1, 1, 24, 1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("Solicitar Cita");
+
+        btnCita.setBackground(new java.awt.Color(51, 102, 255));
+        btnCita.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCita.setForeground(new java.awt.Color(255, 255, 255));
+        btnCita.setText("Añadir cita");
+        btnCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCitaActionPerformed(evt);
+            }
+        });
+
+        btnAsistente.setBackground(new java.awt.Color(255, 153, 51));
+        btnAsistente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAsistente.setForeground(new java.awt.Color(51, 51, 51));
+        btnAsistente.setText("Asistente de voz");
+        btnAsistente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsistenteActionPerformed(evt);
+            }
+        });
+
+        inputMinuto.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 15));
+
+        inputNotas.setColumns(20);
+        inputNotas.setRows(5);
+        jScrollPane1.setViewportView(inputNotas);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Notas:");
+
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton4.setText("Volver");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnAsistente, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCita, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inputEspecialidad, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(inputHora)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inputMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inputMes, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(inputAnnio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(198, 198, 198))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3))
+                        .addContainerGap())))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputAnnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputMinuto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(inputEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCita)
+                    .addComponent(btnAsistente))
+                .addGap(54, 54, 54))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAsistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsistenteActionPerformed
+        AsistenteVozCitaUI frameTipoUsuarioMetodo = new AsistenteVozCitaUI();
+        frameTipoUsuarioMetodo.setPatientID(patientID);
+        // Hacer visible el nuevo frame
+        frameTipoUsuarioMetodo.setVisible(true);
+        // Cerrar el frame actual
+        dispose();
+        
+    }//GEN-LAST:event_btnAsistenteActionPerformed
+
+    private int obtenerIndiceMes(String mes) {
+        String[] nombresMeses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        for (int i = 0; i < nombresMeses.length; i++) {
+            if (nombresMeses[i].equalsIgnoreCase(mes)) {
+                return i;
+            }
+        }
+        return -1; // Si no se encuentra el mes, devuelve -1
+    }
+
+    public boolean revisarContenido() {
+        return !inputEspecialidad.getText().isBlank();
+    }
+
+    private void btnCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaActionPerformed
+        if (revisarContenido()) {
+            Cita stickCita = new Cita();
+            stickCita.setAppointmentAttendant(patientID);
+
+            int dia = Integer.parseInt(inputDia.getSelectedItem().toString());
+            String mesString = (String) inputMes.getSelectedItem();
+            int anio = Integer.parseInt(inputAnnio.getSelectedItem().toString());
+            // Crear un objeto Calendar con la fecha seleccionada
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(anio, obtenerIndiceMes(mesString), dia);
+            // Crear un objeto Date a partir del objeto Calendar
+            Date fechaDate = calendar.getTime();
+            stickCita.setAppointmentDate(fechaDate);
+
+            stickCita.setAppointmentNotes(inputNotas.getText());
+
+            stickCita.setAppointmentSpecialty(inputEspecialidad.getText());
+
+            stickCita.setAppointmentStatus("registrada");
+
+            int hora = (int) inputHora.getValue();
+            int minutos = (int) inputMinuto.getValue();
+            String horaCompleta = String.format("%02d:%02d", hora, minutos);
+            stickCita.setAppointmentTime(horaCompleta);
+
+            CitaDAO citadb = new CitaDAO();
+            citadb.agregarCita(stickCita);
+
+            CitaCreada winUsuarioCreado = new CitaCreada();
+            winUsuarioCreado.setVisible(true);
+        } else {
+            ErrorDatosIngresadosUI frameTipoUsuarioMetodo = new ErrorDatosIngresadosUI();
+            frameTipoUsuarioMetodo.setVisible(true);
+        }
+    }//GEN-LAST:event_btnCitaActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        TramitesUI frameTipoUsuarioMetodo = new TramitesUI();
+        // Hacer visible el nuevo frame
+        frameTipoUsuarioMetodo.setVisible(true);
+        // Cerrar el frame actual
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +329,22 @@ public class SolicitarCitaUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAsistente;
+    private javax.swing.JButton btnCita;
+    private javax.swing.JComboBox<String> inputAnnio;
+    private javax.swing.JComboBox<String> inputDia;
+    private javax.swing.JTextField inputEspecialidad;
+    private javax.swing.JSpinner inputHora;
+    private javax.swing.JComboBox<String> inputMes;
+    private javax.swing.JSpinner inputMinuto;
+    private javax.swing.JTextArea inputNotas;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

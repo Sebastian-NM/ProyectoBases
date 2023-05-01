@@ -108,7 +108,13 @@ public class TramitesUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed
-        // TODO add your handling code here:
+        // Crear una instancia del nuevo frame
+        SolicitarCitaUI frameTipoUsuarioMetodo = new SolicitarCitaUI();
+        frameTipoUsuarioMetodo.setPatientID(patientID);
+        // Hacer visible el nuevo frame
+        frameTipoUsuarioMetodo.setVisible(true);
+        // Cerrar el frame actual
+        dispose();
     }//GEN-LAST:event_btnSolicitarCitaActionPerformed
 
     private String patientID;
@@ -117,11 +123,10 @@ public class TramitesUI extends javax.swing.JFrame {
         this.patientID = patientID;
         // Puedes hacer cualquier otra operación necesaria con el ID del paciente aquí
     }
-    
+
     private void btnCancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCitaActionPerformed
         // Crear una instancia del nuevo frame
         CancelarCitaUI frameTipoUsuarioMetodo = new CancelarCitaUI();
-        System.out.println("Se manda en tramites: "+patientID);
         frameTipoUsuarioMetodo.setPatientID(patientID);
         // Hacer visible el nuevo frame
         frameTipoUsuarioMetodo.setVisible(true);

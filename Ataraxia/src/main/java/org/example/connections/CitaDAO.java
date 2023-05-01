@@ -8,22 +8,27 @@ import org.example.classes.Cita;
 
 public class CitaDAO {
 
-    private static final String INSERTAR_CITA_SQL = "INSERT INTO cita (appointmentID, appointmentStatus, appointmentSpecialty, appointmentDate, appointmentTime, appointmentNotes, appoinmentAttendant) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERTAR_CITA_SQL = "INSERT INTO cita (appointmentStatus, appointmentSpecialty, appointmentDate, appointmentTime, appointmentNotes, appoinmentAttendant) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String ACTUALIZAR_CITA_SQL = "UPDATE cita SET appointmentStatus = ?, appointmentSpecialty = ?, appointmentDate = ?, appointmentTime = ?, appointmentNotes = ?, appoinmentAttendant = ? WHERE appointmentID = ?";
     private static final String ELIMINAR_CITA_SQL = "DELETE FROM cita WHERE appointmentID = ?";
     private static final String OBTENER_CITA_POR_ID_SQL = "SELECT * FROM cita WHERE appointmentID = ?";
     private static final String OBTENER_TODAS_LAS_CITAS_SQL = "SELECT * FROM cita";
 
     public void agregarCita(Cita cita) {
-        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERTAR_CITA_SQL)) {
-            pstmt.setInt(1, cita.getAppointmentId());
-            pstmt.setString(2, cita.getAppointmentStatus());
-            pstmt.setString(3, cita.getAppointmentSpecialty());
-            pstmt.setDate(4, new java.sql.Date(cita.getAppointmentDate().getTime()));
-            pstmt.setString(5, cita.getAppointmentTime());
-            pstmt.setString(6, cita.getAppointmentNotes());
-            pstmt.setString(7, cita.getAppointmentAttendant());
+        try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(INSERTAR_CITA_SQL, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, cita.getAppointmentStatus());
+            pstmt.setString(2, cita.getAppointmentSpecialty());
+            pstmt.setDate(3, new java.sql.Date(cita.getAppointmentDate().getTime()));
+            pstmt.setString(4, cita.getAppointmentTime());
+            pstmt.setString(5, cita.getAppointmentNotes());
+            pstmt.setString(6, cita.getAppointmentAttendant());
             pstmt.executeUpdate();
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int generatedId = generatedKeys.getInt(1);
+                cita.setAppointmentId(generatedId);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
